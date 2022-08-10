@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jube>
+<parameterset name="must_pset" init_with="compiler.xml:imb_compiler_pset">
+  <parameter name="must_repo_folder">${jube_benchmark_home}/../must_rma/src</parameter>
+  <parameter name="must_install_folder">${jube_benchmark_home}/../must_rma/install</parameter>
+  <parameter name="level0_place">thread_app</parameter>
+  <parameter name="level0_size">76800</parameter>
+  <parameter name="level1_place">thread_place</parameter>
+  <parameter name="level1_size">$tasks</parameter>
+</parameterset>
+
+<substituteset name="must_executesub" init_with="platform.xml:executesub">
+  <iofile in="layout.xml.in" out="layout.xml" />
+  <sub source="#LEVEL0_SIZE#" dest="${level0_size}" />
+  <sub source="#LEVEL0_PLACE#" dest="${level0_place}" />
+  <sub source="#LEVEL1_SIZE#" dest="${level1_size}" />
+  <sub source="#LEVEL1_PLACE#" dest="${level1_place}" />
+</substituteset>
+
+<step name="build_must">
+  <use>must_pset</use>
+  <do tag="!skipbuild">
+        module purge; module load DEVELOP cmake/3.21.1 clang/12 intelmpi/2018;
+        cd ${must_repo_folder};
+        mkdir -p build;
+        cd build;
+        cmake -DMPI_C_COMPILER=$MPICC -DMPI_CXX_COMPILER=$MPICXX -DCMAKE_INSTALL_PREFIX="${must_install_folder}" -DENABLE_FORTRAN=0 -DENABLE_TSAN=1 -DENABLE_TYPEART=OFF -DMPI_C_COMPILER=mpigcc -DMPI_CXX_COMPILER=mpigxx -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTS=OFF -DMPIEXEC_EXECUTABLE=$(which mpiexec.hydra) ..;
+        make -j50 install;
+  </do>
+</step>
+</jube>

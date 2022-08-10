@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  This file is part of GTI (Generic Tool Infrastructure)
+
+  Copyright (C)
+    2008-2019 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+    2008-2019 Lawrence Livermore National Laboratories, United States of America
+    2013-2019 RWTH Aachen University, Federal Republic of Germany
+
+  See the LICENSE file in the package base directory for details
+-->
+
+<!DOCTYPE api-specification SYSTEM "/Users/hilbrich/workspace/gti/system-builder/dtd/api-specification.dtd">
+<api-specification unique-name="GTI_VECTORCLOCK_API">
+    <api-headers>
+        <header>@CMAKE_INSTALL_PREFIX@/include/VectorClockApi.h</header>
+        <header>mpi.h</header>
+    </api-headers>
+    <functions>
+        <function return-type="int" name="passVClockAcrossP2P" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="vectorClock" type="unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>size</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="size" type="size_t" intent="in" />
+                <function-argument order="2" name="originId" type="int" intent="in" />
+                <function-argument order="3" name="isSync" type="int" intent="in" />
+                <function-argument order="4" name="isResponse" type="int" intent="in" />
+                <function-argument order="5" name="queueId" type="uint64_t" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="VectorClock:receiveVClockP2P" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>vectorClock</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>originId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>isSync</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>isResponse</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>queueId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="VectorClock" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="passUnlockClockToProxy" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="vectorClock" type="unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>clockSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="clockSize" type="size_t" intent="in" />
+                <function-argument order="2" name="lockHandle" type="uint64_t" intent="in" />
+                <function-argument order="3" name="originId" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="VectorClock:bufferUnlockClock" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>vectorClock</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>clockSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>lockHandle</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>originId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="VectorClock" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="passUnlockClockToEnd" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="vectorClock" type="unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>clockSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="clockSize" type="size_t" intent="in" />
+                <function-argument order="2" name="lockHandle" type="uint64_t" intent="in" />
+                <function-argument order="3" name="originId" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="VectorClock:recvUnlockClock" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>vectorClock</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>clockSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>lockHandle</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>originId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="VectorClock" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="passLockNotify" wrapp-across="yes">
+            <function-arguments>
+                <function-argument order="0" name="lockHandle" type="uint64_t" intent="in" />
+                <function-argument order="1" name="originId" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="VectorClock:handleLockNotify" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>lockHandle</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>originId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="VectorClock" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="void" name="syncNotify" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="remoteRank" type="int" intent="in" />
+                <function-argument order="1" name="ownRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <!-- TODO: Extend GTI such that listeners can be also registered at other specification
+                           files. Currently, we just put the MUST analysis function in the GTI API specification.
+                -->
+                <analysis order="pre" name="RMATrack:receiveSync" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>remoteRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>ownRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+    	</functions>
+</api-specification>

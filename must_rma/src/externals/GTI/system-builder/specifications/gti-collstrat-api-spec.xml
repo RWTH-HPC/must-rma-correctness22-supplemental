@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  This file is part of GTI (Generic Tool Infrastructure)
+
+  Copyright (C)
+    2008-2019 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+    2008-2019 Lawrence Livermore National Laboratories, United States of America
+    2013-2019 RWTH Aachen University, Federal Republic of Germany
+
+  See the LICENSE file in the package base directory for details
+-->
+
+<!DOCTYPE api-specification SYSTEM "/Users/hilbrich/workspace/gti/system-builder/dtd/api-specification.dtd">
+<api-specification unique-name="GTI_COLLSTRAT_API">
+    <api-headers>
+        <header>@CMAKE_INSTALL_PREFIX@/include/CollStratApi.h</header>
+        <header>mpi.h</header>
+    </api-headers>
+    <functions>
+        <function return-type="int" name="naiveBcastSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="7" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratNaive:recvBcast" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratNaive" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="naiveReduceSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <function-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratNaive:recvReduce" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>remoteCounter</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratNaive" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="naiveAllreduceSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <function-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratNaive:recvAllreduce" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>remoteCounter</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratNaive" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="binomialBcastSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="7" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratBinomial:recvBcast" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratBinomial" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="binomialReduceSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <function-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratBinomial:recvReduce" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>remoteCounter</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratBinomial" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+        <function return-type="int" name="binomialAllreduceSend" wrapp-across="yes">
+            <function-arguments>
+                <function-array-argument order="0" name="data" type="const unsigned long long*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>count</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="1" name="count" type="size_t" intent="in" />
+                <function-array-argument order="2" name="groupRanks" type="const int*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>groupSize</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <function-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <function-argument order="5" name="localRootRank" type="int" intent="in" />
+                <function-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <function-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <function-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="CollStratBinomial:recvAllreduce" group="GTI_IMPLICIT">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>data</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>groupRanks</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>groupSize</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>localTargetRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>localRootRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>remoteCounter</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>groupId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>localOriginRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations></operations>
+            <created-by>
+                <by name="CollStratBinomial" group="GTI_IMPLICIT" />
+            </created-by>
+        </function>
+    </functions>
+</api-specification>

@@ -1,0 +1,53 @@
+config.test_filecheck = "@MUST_FILECHECK_EXECUTABLE@"
+config.project_obj_root = "@EXECUTABLE_OUTPUT_PATH@"
+config.operating_system = "@CMAKE_SYSTEM_NAME@"
+config.test_mustrun = "@MUSTRUN@"
+config.mustrun_execution_flags = "@MUST_MUSTRUN_EXECUTION_FLAGS@"
+config.must_bin_dir = "@EXECUTABLE_OUTPUT_PATH@"
+config.mpiexec = "@MPIEXEC_EXECUTABLE@"
+config.mpiexec_numproc_flag = "@MPIEXEC_NUMPROC_FLAG@"
+config.builddir = "@MUST_BINARY_DIR@"
+config.srcdir = "@MUST_SOURCE_DIR@"
+
+config.gti_is_thread_safe = @GTI_IS_THREAD_SAFE@
+config.gti_enable_fortran = @GTI_ENABLE_FORTRAN@
+config.openmp_found = @OpenMP_FOUND@
+config.have_mpi_type_create_resized = @HAVE_MPI_TYPE_CREATE_RESIZED@
+config.have_mpi_type_create_indexed_block = @HAVE_MPI_TYPE_CREATE_INDEXED_BLOCK@
+config.have_mpi_alltoallw = @HAVE_MPI_ALLTOALLW@
+config.have_mpi_exscan = @HAVE_MPI_EXSCAN@
+config.have_mpi_reduce_scatter_block = @HAVE_MPI_REDUCE_SCATTER_BLOCK@
+config.have_mpi_reduce_scatter = @HAVE_MPI_REDUCE_SCATTER@
+config.have_mpi_wchar = @HAVE_MPI_WCHAR@
+config.have_mpi_signed_char = @HAVE_MPI_SIGNED_CHAR@
+config.have_mpi_iallgather = @HAVE_MPI_IALLGATHER@
+config.have_mpi_iallgatherv = @HAVE_MPI_IALLGATHERV@
+config.have_mpi_iallreduce = @HAVE_MPI_IALLREDUCE@
+config.have_mpi_ialltoall = @HAVE_MPI_IALLTOALL@
+config.have_mpi_ialltoallv = @HAVE_MPI_IALLTOALLV@
+config.have_mpi_ialltoallw = @HAVE_MPI_IALLTOALLW@
+config.have_mpi_ibarrier = @HAVE_MPI_IBARRIER@
+config.have_mpi_ibcast = @HAVE_MPI_IBCAST@
+config.have_mpi_igather = @HAVE_MPI_IGATHER@
+config.have_mpi_igatherv = @HAVE_MPI_IGATHERV@
+config.have_mpi_ireduce = @HAVE_MPI_IREDUCE@
+config.have_mpi_ireduce_scatter = @HAVE_MPI_IREDUCE_SCATTER@
+config.have_mpi_ireduce_scatter_block = @HAVE_MPI_IREDUCE_SCATTER_BLOCK@
+config.have_mpi_iscan = @HAVE_MPI_ISCAN@
+config.have_mpi_iexscan = @HAVE_MPI_IEXSCAN@
+config.have_mpi_iscatter = @HAVE_MPI_ISCATTER@
+config.have_mpi_iscatterv = @HAVE_MPI_ISCATTERV@
+config.disable_must_clean = @TESTS_DISABLE_MUST_CLEAN@
+config.disable_umpire_tests = @DISABLE_UMPIRE_TESTS@
+config.disable_marmot_tests = @DISABLE_MARMOT_TESTS@
+config.enable_fortran_tests = @ENABLE_Fortran_TESTS@
+config.enable_fortran_mixed_tests = @ENABLE_Fortran_MIXED_TESTS@
+config.fast_tests_only = @MUST_FAST_TESTS_ONLY@
+config.mpi_has_assertions = @MUST_MPI_HAS_ASSERTIONS@
+config.typeart_mpicc = "@TYPEART_MPICC_CMD@"
+config.have_typeart = @ENABLE_TYPEART@ and config.typeart_mpicc
+config.enable_tsan = @HAVE_TSAN@
+config.stacktrace = @ENABLE_STACKTRACE@
+
+# Let the main config do the real work.
+lit_config.load_config(config, "@CMAKE_CURRENT_SOURCE_DIR@/lit.cfg")

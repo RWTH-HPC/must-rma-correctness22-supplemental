@@ -1,0 +1,49 @@
+<layout-specification>
+    <levels>
+        <level order="0" size="#LEVEL0_SIZE#" place-name="#LEVEL0_PLACE#">
+            <analyses>
+                <analysis name="DatatypePredefs" group="MUST_Resource" />
+                <analysis name="CommPredefs" group="MUST_Resource" />
+                <analysis name="FinalizeNotify" group="MUST_Base" />
+                <analysis name="RequestCondition" group="MUST_RequestCondition" />
+                <analysis name="AppThrAnn" group="MUST_OneSidedChecks" />
+                <analysis name="CollectiveCondition" group="MUST_CollectiveCondition" />
+            </analyses>
+        </level>
+        <level order="1" size="#LEVEL1_SIZE#" place-name="#LEVEL1_PLACE#">
+            <analyses>
+                <analysis name="RMATrack" group="MUST_OneSidedChecks" />
+                <analysis name="TSanSyncClockRecorder" group="MUST_OneSidedChecks" />
+                <analysis name="OriginChecks" group="MUST_OneSidedChecks" />
+                <analysis name="TargetChecks" group="MUST_OneSidedChecks" />
+                <analysis name="VectorClockWrapper" group="MUST_VectorClock" />
+            </analyses>
+        </level>
+    </levels>
+    <communications>
+        <default>
+            <comm-strategy name="CStratSimpleUp">
+                <settings></settings>
+            </comm-strategy>
+            <comm-protocol name="CProtMpiSplited">
+                <settings></settings>
+            </comm-protocol>
+        </default>
+        <connection top-level="1" bottom-level="0">
+            <comm-strategy name="CStratSimpleUp">
+                <settings></settings>
+            </comm-strategy>
+            <comm-protocol name="CProtSharedMemory">
+                <settings></settings>
+            </comm-protocol>
+        </connection>
+        <connection top-level="1" bottom-level="1">
+            <comm-strategy name="CStratIsendIntra">
+                <settings></settings>
+            </comm-strategy>
+            <comm-protocol name="CProtMpiSplited">
+                <settings></settings>
+            </comm-protocol>
+        </connection>
+    </communications>
+</layout-specification>

@@ -1,0 +1,26 @@
+# Assume that the MUST runtime itself is race free.
+called_from_lib:libcProtSharedMemory.so
+# Assume that the MPI runtime itself is race free.
+called_from_lib:libopen-pal.so.13
+called_from_lib:mca_shmem_mmap.so
+called_from_lib:mca_shmem_posix.so
+called_from_lib:mca_grpcomm_bad.so
+called_from_lib:libopen-rte.so.12
+called_from_lib:mca_db_hash.so
+called_from_lib:mca_routed_binomial.so
+called_from_lib:libopen-rte.so.12
+called_from_lib:mca_db_hash.so
+called_from_lib:mca_rml_oob.so
+called_from_lib:mca_oob_tcp.so
+called_from_lib:mca_btl_openib.so
+called_from_lib:mca_pml_bfo.so
+called_from_lib:mca_pml_ob1.so
+called_from_lib:mca_allocator_bucket.so
+called_from_lib:mca_osc_pt2pt.so
+called_from_lib:mca_coll_libnbc.so
+called_from_lib:mca_btl_vader.so
+called_from_lib:libc++.so.1
+mutex:libcProtSharedMemory.so
+mutex:libmpi.so.12
+# Do not report races on the actual lock acquirement
+race:annotateRWLockAcquired

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jube>
+  <parameterset name="system_pset" init_with="platform.xml:systemParameter">
+    <parameter name="queue">c18m</parameter>
+    <parameter name="account">supp0001</parameter>
+  </parameterset>
+
+  <parameterset name="execute_pset" init_with="platform.xml:executeset">
+  </parameterset>
+</jube>

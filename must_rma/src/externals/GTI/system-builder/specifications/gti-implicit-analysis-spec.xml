@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  This file is part of GTI (Generic Tool Infrastructure)
+
+  Copyright (C)
+    2008-2019 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+    2008-2019 Lawrence Livermore National Laboratories, United States of America
+    2013-2019 RWTH Aachen University, Federal Republic of Germany
+
+  See the LICENSE file in the package base directory for details
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "/Users/hilbrich/workspace/gti/system-builder/dtd/analysis-specification.dtd">
+<analysis-specification group-name="GTI_IMPLICIT" include-path="@CMAKE_INSTALL_PREFIX@/include" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+		<analysis name="CollStratNaive">
+			<registered-name>CollStratNaive</registered-name>
+			<module-name>libcollStratNaive</module-name>
+			<header-name>I_CollStrat.h</header-name>
+			<interface-type>I_CollStrat</interface-type>
+			<is-global>0</is-global>
+			<is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="recvBcast">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="7" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvReduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvAllreduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+		</analysis>
+		<analysis name="CollStratBinomial">
+			<registered-name>CollStratBinomial</registered-name>
+			<module-name>libcollStratBinomial</module-name>
+			<header-name>I_CollStrat.h</header-name>
+			<interface-type>I_CollStrat</interface-type>
+			<is-global>0</is-global>
+			<is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="recvBcast">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="7" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvReduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvAllreduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+		</analysis>
+		<analysis name="CollStratMpi">
+			<registered-name>CollStratMpi</registered-name>
+			<module-name>libcollStratMpi</module-name>
+			<header-name>I_CollStrat.h</header-name>
+			<interface-type>I_CollStrat</interface-type>
+			<is-global>0</is-global>
+			<is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="recvBcast">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="7" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvReduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvAllreduce">
+                <analysis-argument order="0" name="data" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="count" type="size_t" intent="in" />
+                <analysis-argument order="2" name="groupRanks" type="int*" intent="in" />
+                <analysis-argument order="3" name="groupSize" type="size_t" intent="in" />
+                <analysis-argument order="4" name="localTargetRank" type="int" intent="in" />
+                <analysis-argument order="5" name="localRootRank" type="int" intent="in" />
+                <analysis-argument order="6" name="remoteCounter" type="size_t" intent="in" />
+                <analysis-argument order="7" name="groupId" type="uint64_t" intent="in" />
+                <analysis-argument order="8" name="localOriginRank" type="int" intent="in" />
+            </analysis-function>
+		</analysis>
+        <analysis name="PControl">
+            <registered-name>PControl</registered-name>
+            <module-name>libPControl</module-name>
+            <header-name>I_PControl.h</header-name>
+            <interface-type>I_PControl</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="dummy">
+            </analysis-function>
+        </analysis>
+		<analysis name="VectorClock">
+			<registered-name>VectorClock</registered-name>
+			<module-name>libvectorClock</module-name>
+			<header-name>I_VectorClock.h</header-name>
+			<interface-type>I_VectorClock</interface-type>
+			<is-global>0</is-global>
+			<is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="GTI_IMPLICIT">CollStratNaive</analysis-depend>
+                <analysis-depend group="GTI_IMPLICIT">CollStratBinomial</analysis-depend>
+                <analysis-depend group="GTI_IMPLICIT">CollStratMpi</analysis-depend>
+            </dependencies>
+            <analysis-function name="init">
+            </analysis-function>
+            <analysis-function name="tick"></analysis-function>
+            <analysis-function name="receiveVClockP2P">
+                <analysis-argument order="0" name="vectorClock" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="originId" type="int" intent="in" />
+                <analysis-argument order="2" name="isSync" type="int" intent="in" />
+                <analysis-argument order="3" name="isResponse" type="int" intent="in" />
+                <analysis-argument order="4" name="queueId" type="uint64_t" intent="in" />
+            </analysis-function>
+            <analysis-function name="signal">
+                <analysis-argument order="0" name="isSync" type="int" intent="in" />
+                <analysis-argument order="1" name="appRank" type="int" intent="in" />
+                <analysis-argument order="2" name="queueId" type="uint64_t" intent="in" />
+            </analysis-function>
+            <analysis-function name="bufferSignal">
+                <analysis-argument order="0" name="appRank" type="int" intent="in" />
+                <analysis-argument order="1" name="queueId" type="uint64_t" intent="in" />
+                <analysis-argument order="2" name="requestHandle" type="unsigned long" intent="in" />
+            </analysis-function>
+            <analysis-function name="addPersistentSendInfo">
+                <analysis-argument order="0" name="appRank" type="int" intent="in" />
+                <analysis-argument order="1" name="queueId" type="uint64_t" intent="in" />
+                <analysis-argument order="2" name="requestHandle" type="unsigned long" intent="in" />
+            </analysis-function>
+            <analysis-function name="bufferWait">
+                <analysis-argument order="0" name="queueId" type="uint64_t" intent="in" />
+                <analysis-argument order="1" name="requestHandle" type="unsigned long" intent="in" />
+            </analysis-function>
+            <analysis-function name="addPersistentRecvInfo">
+                <analysis-argument order="0" name="requestHandle" type="unsigned long" intent="in" />
+                <analysis-argument order="1" name="comm" type="uint64_t" intent="in" />
+            </analysis-function>
+            <analysis-function name="handleRequest">
+                <analysis-argument order="0" name="requestHandle" type="unsigned long" intent="in" />
+                <analysis-argument order="1" name="source" type="int" intent="in" />
+                <analysis-argument order="2" name="tag" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="waitForSignal">
+                <analysis-argument order="0" name="originAppRank" type="int" intent="in" />
+                <analysis-argument order="1" name="queueId" type="uint64_t" intent="in" />
+            </analysis-function>
+            <analysis-function name="waitForResponse">
+                <analysis-argument order="0" name="originAppRank" type="int" intent="in" />
+                <analysis-argument order="1" name="queueId" type="uint64_t" intent="in" />
+            </analysis-function>
+            <analysis-function name="bufferUnlockClock">
+                <analysis-argument order="0" name="collClock" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="clockSize" type="uint64_t" intent="in" />
+                <analysis-argument order="2" name="lockHandle" type="uint64_t" intent="in" />
+                <analysis-argument order="3" name="originId" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="unlock">
+                <analysis-argument order="0" name="lockHandle" type="uint64_t" intent="in" />
+                <analysis-argument order="1" name="appRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="lock">
+                <analysis-argument order="0" name="lockHandle" type="uint64_t" intent="in" />
+                <analysis-argument order="1" name="appRank" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="handleLockNotify">
+                <analysis-argument order="0" name="lockHandle" type="uint64_t" intent="in" />
+                <analysis-argument order="1" name="originId" type="int" intent="in" />
+            </analysis-function>
+            <analysis-function name="recvUnlockClock">
+                <analysis-argument order="0" name="collClock" type="unsigned long long*" intent="in" />
+                <analysis-argument order="1" name="clockSize" type="size_t" intent="in" />
+                <analysis-argument order="2" name="lockHandle" type="uint64_t" intent="in" />
+                <analysis-argument order="3" name="originId" type="int" intent="in" />
+            </analysis-function>
+		</analysis>
+        <analysis name="ShutdownHandler">
+            <registered-name>ShutdownHandler</registered-name>
+            <module-name>libshutdownHandler</module-name>
+            <header-name>I_ShutdownHandler.h</header-name>
+            <interface-type>I_ShutdownHandler</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="notifyShutdown"
+            	needs-channel-id="yes">
+            </analysis-function>
+        </analysis>
+    <analysis name="ShutdownReceiver">
+            <registered-name>ShutdownReceiver</registered-name>
+            <module-name>libshutdownReceiver</module-name>
+            <header-name>I_ShutdownReceiver.h</header-name>
+            <interface-type>I_ShutdownReceiver</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <analysis-function name="receive">
+            </analysis-function>
+        </analysis><analysis name="PanicHandler">
+            <registered-name>PanicHandler</registered-name>
+            <module-name>libpanicHandler</module-name>
+            <header-name>I_PanicHandler.h</header-name>
+            <interface-type>I_PanicHandler</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies>
+            <reductions>
+            	<analysis-depend>PanicFilter</analysis-depend></reductions>
+            <analysis-function name="raisePanic">
+            </analysis-function>
+        </analysis><analysis name="PanicReceiver">
+            <registered-name>PanicReceiver</registered-name>
+            <module-name>libpanicReceiver</module-name>
+            <header-name>I_PanicReceiver.h</header-name>
+            <interface-type>I_PanicReceiver</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+            </dependencies><reductions>
+            	<analysis-depend>PanicFilter</analysis-depend></reductions>
+            <analysis-function name="notifyPanic">
+            </analysis-function>
+        <analysis-function name="notifyFlush">
+            </analysis-function><analysis-function name="notifyRaisePanic">
+            </analysis-function></analysis>
+    	<analysis name="PanicFilter" reduction="yes">
+    		<registered-name>PanicFilter</registered-name>
+    		<module-name>libpanicFilter</module-name>
+    		<header-name>I_PanicFilter.h</header-name>
+    		<interface-type>I_PanicFilter</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<analysis-function name="propagate"></analysis-function>
+    	</analysis><analysis name="ProfilerMpi">
+    		<registered-name>ProfilerMpi</registered-name>
+    		<module-name>libprofilerMpi</module-name>
+    		<header-name>I_Profiler.h</header-name>
+    		<interface-type>I_Profiler</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<analysis-function name=""></analysis-function></analysis><analysis name="FloodControl">
+    		<registered-name>FloodControl</registered-name>
+    		<module-name>libfloodControl</module-name>
+    		<header-name>I_FloodControl.h</header-name>
+    		<interface-type>I_FloodControl</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<analysis-function name=""></analysis-function></analysis>
+    	<analysis name="BreakEnforcer" sub-group="GTI_Break">
+    		<registered-name>BreakEnforcer</registered-name>
+    		<module-name>libbreakEnforcer</module-name>
+    		<header-name>I_BreakEnforcer.h</header-name>
+    		<interface-type>I_BreakEnforcer</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<analysis-function name="test">
+    		</analysis-function>
+    	<analysis-function name="handleBroadcastBreak">
+    			<analysis-argument order="0" type="int" name="code" />
+    		</analysis-function></analysis>
+    	<analysis name="BreakReduction" sub-group="GTI_Break"
+    		reduction="yes">
+    		<registered-name>BreakReduction</registered-name>
+    		<module-name>libbreakReduction</module-name>
+    		<header-name>I_BreakReduction.h</header-name>
+    		<interface-type>I_BreakReduction</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<analysis-function name="addBreakRequest">
+    		</analysis-function>
+    	<analysis-function name="removeBreakRequest">
+    		</analysis-function></analysis><analysis name="BreakManager" sub-group="GTI_Break">
+    		<registered-name>BreakManager</registered-name>
+    		<module-name>libbreakManager</module-name>
+    		<header-name>I_BreakManager.h</header-name>
+    		<interface-type>I_BreakManager</interface-type>
+    		<is-global>0</is-global>
+    		<is-process-global>0</is-process-global>
+    		<dependencies></dependencies>
+    		<reductions>
+    			<analysis-depend>BreakReduction</analysis-depend></reductions>
+    		<analysis-function name="requestBreak"
+    			needs-channel-id="yes">
+    		</analysis-function>
+    		<analysis-function name="removeBreak" needs-channel-id="yes">
+    		</analysis-function></analysis></analyses>
+    <operations>
+    </operations>
+</analysis-specification>

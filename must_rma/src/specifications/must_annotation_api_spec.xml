@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE api-specification SYSTEM "@MUST_SPECIFICATION_DTD_PATH@/api-specification.dtd">
+<api-specification unique-name="MUST_Annotation_API">
+    <api-headers>
+    </api-headers>
+    <functions>
+                <function name="AnnotateLock" return-type="void" annotation="yes">
+                    <function-arguments>
+                        <function-argument name="win" type="MPI_Win" intent="in" order="0" />
+                        <function-argument name="appRank" type="int" intent="in" order="1" />
+                        <function-argument name="lock_type" type="int" intent="in" order="2" />
+                    </function-arguments>
+                    <analyses>
+                        <analysis order="pre" name="VectorClockWrapper:lock" group="MUST_VectorClock">
+                            <analysis-arguments>
+                                <analysis-argument type="operation-len" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="operation" analysis-arg-order="1">
+                                    <op-name group="MPI_Base" id="2">convertWin2int</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="2">
+                                    <call-arg-name>appRank</call-arg-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="3">
+                                    <call-arg-name>lock_type</call-arg-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                        <analysis order="pre" name="InitParallelId:init" group="MUST_Base">
+                            <analysis-arguments>
+                                <analysis-argument type="operation" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                    </analyses>
+                    <operations>
+                        <operation group="MUST_Base" name="provideParallelIdStorage" order="pre" id="1">
+                            <operation-arguments />
+                        </operation>
+                        <operation group="MPI_Base" name="convertWin2int" order="pre" id="2">
+                            <operation-arguments>
+                            <operation-argument op-arg-order="0">
+                                <call-arg-name>win</call-arg-name>
+                            </operation-argument>
+                            </operation-arguments>
+                        </operation>
+                    </operations>
+                </function>
+                <function name="AnnotateUnlock" return-type="void" annotation="yes">
+                    <function-arguments>
+                        <function-argument name="win" type="MPI_Win" intent="in" order="0" />
+                        <function-argument name="appRank" type="int" intent="in" order="1" />
+                    </function-arguments>
+                    <analyses>
+                        <analysis order="pre" name="VectorClockWrapper:unlock" group="MUST_VectorClock">
+                            <analysis-arguments>
+                                <analysis-argument type="operation-len" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="operation" analysis-arg-order="1">
+                                    <op-name group="MPI_Base" id="2">convertWin2int</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="2">
+                                    <call-arg-name>appRank</call-arg-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                        <analysis order="pre" name="InitParallelId:init" group="MUST_Base">
+                            <analysis-arguments>
+                                <analysis-argument type="operation" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                    </analyses>
+                    <operations>
+                        <operation group="MUST_Base" name="provideParallelIdStorage" order="pre" id="1">
+                            <operation-arguments />
+                        </operation>
+                        <operation group="MPI_Base" name="convertWin2int" order="pre" id="2">
+                            <operation-arguments>
+                            <operation-argument op-arg-order="0">
+                                <call-arg-name>win</call-arg-name>
+                            </operation-argument>
+                            </operation-arguments>
+                        </operation>
+                    </operations>
+                </function>
+                <function name="AnnotateTick" return-type="void" annotation="yes">
+                    <function-arguments>
+                    </function-arguments>
+                    <analyses>
+                        <analysis order="pre" name="VectorClock:tick" group="GTI_IMPLICIT">
+                            <analysis-arguments>
+                            </analysis-arguments>
+                        </analysis>
+                    </analyses>
+                    <operations>
+                    </operations>
+                </function>
+                <function name="AnnotateProcessSignal" return-type="void" annotation="yes">
+                    <function-arguments>
+                        <function-argument name="appRank" type="int" intent="in" order="0" />
+                        <function-argument name="tag" type="int" intent="in" order="1" />
+                        <function-argument name="comm" type="MPI_Comm" intent="in" order="2" />
+                    </function-arguments>
+                    <analyses>
+                        <analysis order="pre" name="VectorClockWrapper:signal" group="MUST_VectorClock">
+                            <analysis-arguments>
+                                <analysis-argument type="operation-len" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="operation" analysis-arg-order="1">
+                                    <op-name group="MUST_Resource" id="1">return0</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="2">
+                                    <call-arg-name>appRank</call-arg-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="3">
+                                    <call-arg-name>tag</call-arg-name>
+                                </analysis-argument>
+                                <analysis-argument type="operation" analysis-arg-order="4">
+                                    <op-name group="MPI_Base" id="3">convertComm2int</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                        <analysis order="pre" name="InitParallelId:init" group="MUST_Base">
+                            <analysis-arguments>
+                                <analysis-argument type="operation" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                    </analyses>
+                    <operations>
+                        <operation order="pre" name="return0" group="MUST_Resource" id="1">
+                            <operation-arguments />
+                        </operation>
+                        <operation group="MUST_Base" name="provideParallelIdStorage" order="pre" id="1">
+                        <operation-arguments />
+                        </operation>
+                        <operation group="MPI_Base" name="convertComm2int" order="pre" id="3">
+                            <operation-arguments>
+                                <operation-argument op-arg-order="0">
+                                    <call-arg-name>comm</call-arg-name>
+                                </operation-argument>
+                            </operation-arguments>
+                        </operation>
+                    </operations>
+                </function>
+                <function name="AnnotateProcessWait" return-type="void" annotation="yes">
+                    <function-arguments>
+                        <function-argument name="appRank" type="int" intent="in" order="0" />
+                        <function-argument name="tag" type="int" intent="in" order="1" />
+                        <function-argument name="comm" type="MPI_Comm" intent="in" order="2" />
+                    </function-arguments>
+                    <analyses>
+                        <analysis order="pre" name="VectorClockWrapper:wait" group="MUST_VectorClock">
+                            <analysis-arguments>
+                                <analysis-argument type="operation-len" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="1">
+                                    <call-arg-name>appRank</call-arg-name>
+                                </analysis-argument>
+                                <analysis-argument type="mapped" analysis-arg-order="2">
+                                    <call-arg-name>tag</call-arg-name>
+                                </analysis-argument>
+                                <analysis-argument type="operation" analysis-arg-order="3">
+                                    <op-name group="MPI_Base" id="3">convertComm2int</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                        <analysis order="pre" name="InitParallelId:init" group="MUST_Base">
+                            <analysis-arguments>
+                                <analysis-argument type="operation" analysis-arg-order="0">
+                                    <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                                </analysis-argument>
+                            </analysis-arguments>
+                        </analysis>
+                    </analyses>
+                    <operations>
+                        <operation group="MUST_Base" name="provideParallelIdStorage" order="pre" id="1">
+                            <operation-arguments />
+                        </operation>
+                        <operation group="MPI_Base" name="convertComm2int" order="pre" id="3">
+                            <operation-arguments>
+                                <operation-argument op-arg-order="0">
+                                    <call-arg-name>comm</call-arg-name>
+                                </operation-argument>
+                            </operation-arguments>
+                        </operation>
+                    </operations>
+                </function>
+        <function name="AnnotateIntegerWarningIfZero" return-type="void" annotation="yes">
+            <function-arguments>
+                <function-argument name="value" type="int" intent="in" order="0" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="IntegerChecks:warningIfZero" group="MUST_BasicChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="operation-len" analysis-arg-order="0">
+                            <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                        </analysis-argument>
+                        <analysis-argument type="operation-len" analysis-arg-order="1">
+                            <op-name group="MUST_Base" id="1">provideLocationIdStorage</op-name>
+                        </analysis-argument>
+                        <analysis-argument type="operation" analysis-arg-order="2">
+                            <op-name group="MUST_Base" id="1">buildArgumentId_1_comm</op-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>value</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="InitParallelId:init" group="MUST_Base">
+                    <analysis-arguments>
+                        <analysis-argument type="operation" analysis-arg-order="0">
+                            <op-name group="MUST_Base" id="1">provideParallelIdStorage</op-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="InitLocationId:init" group="MUST_Base">
+                    <analysis-arguments>
+                        <analysis-argument type="operation" analysis-arg-order="0">
+                            <op-name group="MUST_Base" id="1">provideLocationIdStorage</op-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>USE_CALLNAME</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>USE_CALLID</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+                <operation group="MUST_Base" name="provideLocationIdStorage" order="pre" id="1">
+                    <operation-arguments>
+                        <operation-argument op-arg-order="0">
+                            <call-arg-name>USE_CALLNAME</call-arg-name>
+                        </operation-argument>
+                        <operation-argument op-arg-order="1">
+                            <call-arg-name>USE_CALLID</call-arg-name>
+                        </operation-argument>
+                    </operation-arguments>
+                </operation>
+                <operation group="MUST_Base" name="provideParallelIdStorage" order="pre" id="1">
+                    <operation-arguments />
+                </operation>
+                <operation group="MUST_Base" name="buildArgumentId_1_comm" order="pre" id="1">
+                    <operation-arguments />
+                </operation>
+            </operations>
+        </function>
+        <function name="ChangeMessageFile" return-type="void" annotation="yes">
+            <function-arguments>
+                <function-argument name="filename" type="const char*" intent="in" order="0" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MessageFileManager:changeMessageFileWrapper" group="MUST_Base">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>filename</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+    </functions>
+</api-specification>

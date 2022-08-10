@@ -1,0 +1,4 @@
+# comments
+
+messageType: MUST_ERROR_MESSAGE_LOST:*
+messageType: MUST_ERROR_LEAK_REQUEST:src:errors_with_different_ids_2.c

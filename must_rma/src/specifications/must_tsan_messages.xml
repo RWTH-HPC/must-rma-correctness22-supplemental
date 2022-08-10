@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_TSanMessages" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="TSanMessages">
+            <registered-name>TSanMessages</registered-name>
+            <module-name>libTSanMessages</module-name>
+            <header-name>I_TSanMessages.h</header-name>
+            <interface-type>I_TSanMessages</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Base">CreateMessage</analysis-depend>
+                <analysis-depend group="MUST_Base">InitParallelId</analysis-depend>
+                <analysis-depend group="MUST_Base">InitLocationId</analysis-depend>
+			</dependencies>
+			<analysis-function name="fini">
+				<!--<analysis-argument order="0" type="char*" name="report" /> -->
+			</analysis-function>
+
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

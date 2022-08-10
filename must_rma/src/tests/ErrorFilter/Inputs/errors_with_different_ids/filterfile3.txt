@@ -1,0 +1,4 @@
+# comments
+
+messageType: MUST_WARNING_INTEGER_ZERO:src:errors_with_different_ids.c
+messageType: MUST_ERROR_TYPEMATCH_MISMATCH:*

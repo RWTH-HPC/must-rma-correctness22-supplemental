@@ -1,0 +1,3 @@
+# comments
+
+messageType: MUST_WARNING_INTEGER_ZERO:*

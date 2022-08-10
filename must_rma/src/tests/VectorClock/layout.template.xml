@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE layout-specification SYSTEM "@MUST_SPECIFICATION_DTD_PATH@/layout-specification.dtd">
+<layout-specification>
+	<levels>
+		<level order="0" size="${totalProcs}" place-name="mpi_app">
+			<analyses>
+                <!--<analysis name="DCollectiveInitNotify" group="MUST_DistributedDeadlock"/>-->
+			    <analysis name="DatatypePredefs" group="MUST_Resource"/>
+			    <analysis name="CommPredefs" group="MUST_Resource"/>
+                <!--
+				<analysis name="PControl" group="GTI_IMPLICIT"/>
+			    <analysis name="ProfilerMpi" group="GTI_IMPLICIT"/>
+                -->
+                <!--<analysis name="FinalizeNotify" group="MUST_Base"/>-->
+				${level0ModString}
+			</analyses>
+		</level>
+		<level order="1" size="${numPlaces}" place-name="mpi_place">
+			<analyses>
+                <analysis name="VectorClock" group="GTI_IMPLICIT"/>
+                <analysis name="VectorClockWrapper" group="MUST_VectorClock"/>
+                <!--
+			    <analysis name="ProfilerMpi" group="GTI_IMPLICIT"/>
+                -->
+				${level1ModString}
+			</analyses>
+		</level>
+    </levels>
+	<communications>
+		<default>
+			<comm-strategy name="CStratSimpleUp">
+				<settings></settings>
+			</comm-strategy>
+			<comm-protocol name="CProtMpiSplited">
+				<settings></settings>
+			</comm-protocol>
+		</default>
+		<connection top-level="1" bottom-level="0"></connection>
+		<connection top-level="1" bottom-level="1">
+			<comm-strategy name="CStratPRecvIntra">
+				<settings></settings>
+			</comm-strategy>
+			<comm-protocol name="CProtMpiSplited">
+				<settings></settings>
+			</comm-protocol></connection>
+	</communications>
+</layout-specification>

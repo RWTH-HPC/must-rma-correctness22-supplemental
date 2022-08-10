@@ -1,0 +1,13 @@
+# Assume that the runtime itself is race free.
+#called_from_lib:libcProtSharedMemory.so
+called_from_lib:libomp.so
+called_from_lib:libopen-rte.so.12
+called_from_lib:libopen-pal.so.13
+called_from_lib:mca_grpcomm_bad.so
+
+
+
+
+# TSan reports "thread leak" because the threads are joined on shutdown.
+thread:^__kmp_create_worker$
+

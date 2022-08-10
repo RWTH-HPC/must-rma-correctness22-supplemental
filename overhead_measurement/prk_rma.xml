@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jube>
+  <include-path>
+    <path>.</path>
+    <path>${JUBE_INCLUDE_PATH}</path>
+    <path>${templatedir}</path>
+    <path>common</path>
+  </include-path>
+
+  <benchmark name="PRK_RMA" outpath="bench_run">
+    <comment>PRK RMA</comment>
+
+    <!-- Stencil kernel -->
+    <parameterset name="prk_kernel_pset" tag="stencil">
+      <parameter name="kernel_folder">Stencil</parameter>
+      <parameter name="kernel_name">stencil</parameter>
+      <parameter name="source_path">ParRes/MPIRMA/${kernel_folder}</parameter>
+    </parameterset>
+
+    <parameterset name="prk_kernel_args_pset" tag="stencil">
+      <parameter name="num_iterations">400</parameter>
+      <parameter name="grid_size" mode="python">20000</parameter>
+    </parameterset>
+
+    <!-- Transpose kernel -->
+    <parameterset name="prk_kernel_pset" tag="transpose">
+      <parameter name="kernel_folder">Transpose</parameter>
+      <parameter name="kernel_name">transpose</parameter>
+      <parameter name="source_path">ParRes/MPIRMA/${kernel_folder}</parameter>
+    </parameterset>
+
+    <parameterset name="prk_kernel_args_pset" tag="transpose">
+      <parameter name="num_iterations">400</parameter>
+      <parameter name="matrix_order">15360</parameter>
+      <parameter name="tile_size">-1</parameter>
+      <parameter name="sync">1</parameter>
+      <parameter name="flush_local">0</parameter>
+    </parameterset>
+
+    <fileset name="prk_jobfiles">
+      <copy>layout.xml.in</copy>
+      <copy>submit.job.in</copy>
+    </fileset>
+
+    <parameterset name="prk_compiler_pset" init_with="compiler.xml:imb_compiler_pset">
+    </parameterset>
+
+    <parameterset name="prk_execute_pset" init_with="platform.xml:executeset">
+      <parameter name="submit_script">submit.job</parameter>
+      <parameter name="args_starter">-n $tasks</parameter>
+      <parameter name="starter">mpiexec.hydra</parameter>
+    </parameterset>
+
+    <parameterset name="prk_system_pset" init_with="common.xml:system_pset">
+      <parameter name="preprocess">echo HOSTNAME=$HOSTNAME; module purge; module load DEVELOP cmake/3.21.1 clang/12 intelmpi/2018</parameter>
+      <parameter name="threadspertask">2</parameter>
+      <parameter name="nodes">2,4,8</parameter>
+      <parameter name="taskspernode" mode="python">24</parameter>
+      <parameter name="tasks" mode="python">$taskspernode * $nodes</parameter>
+      <parameter name="timelimit">00:40:00</parameter>
+      <parameter name="additional_job_config">#SBATCH --exclusive
+        #SBATCH --switches=1
+      </parameter>
+      <parameter name="executable">build_prk/${source_path}/${kernel_name}</parameter>
+      <parameter name="args_exec" tag="stencil">$num_iterations $grid_size</parameter>
+      <parameter name="args_exec" tag="transpose">$num_iterations $matrix_order $tile_size $sync $flush_local</parameter>
+    </parameterset>
+
+    <include from="must.xml" path="parameterset" />
+
+    <include from="must.xml" path="substituteset" />
+
+    <substituteset name="prk_executesub" init_with="platform.xml:executesub">
+      <sub source="#KERNEL_NAME#" dest="${kernel_name}" />
+      <sub source="#TASKSPERNODE#" dest="${taskspernode}" />
+      <sub source="#MUSTRUN#" dest="${must_install_folder}/bin/mustrun" />
+    </substituteset>
+
+    <fileset name="prk_sources">
+      <copy>ParRes</copy>
+    </fileset>
+
+    <include from="must.xml" path="step" />
+
+    <step name="build_prk">
+      <use>prk_sources</use>
+      <use>prk_kernel_pset</use>
+      <use>prk_compiler_pset</use>
+      <do>module purge; module load DEVELOP cmake/3.21.1 clang/12 intelmpi/2018;
+          cd ${source_path};
+          make clean;
+          make ${kernel_name}; mv ${kernel_name} ${kernel_name}.plain;
+          make clean;
+          TSAN=ON make $kernel_name; mv ${kernel_name} ${kernel_name}.tsan
+      </do>
+    </step>
+
+    <step name="run_prk" depend="build_prk">
+      <use>must_pset</use>
+      <use>must_executesub</use>
+      <use>prk_jobfiles</use>
+      <use>prk_execute_pset</use>
+      <use>prk_executesub</use>
+      <use>prk_kernel_pset</use>
+      <use>prk_system_pset</use>
+      <use>prk_kernel_args_pset</use>
+      <do done_file="${done_file}">${submit} ${args_submit} ${submit_script}</do>
+    </step>
+
+
+    <patternset name="prk_pattern_plain">
+      <pattern name="total_t_plain">Total time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="avg_t_plain">Avg time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="rate_plain">Rate \([^\s]*\): ${jube_pat_fp}</pattern>
+    </patternset>
+
+    <patternset name="prk_pattern_tsan">
+      <pattern name="total_t_tsan">Total time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="avg_t_tsan">Avg time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="rate_tsan">Rate \([^\s]*\): ${jube_pat_fp}</pattern>
+    </patternset>
+
+    <patternset name="prk_pattern_mustrma">
+      <pattern name="total_t_mustrma">Total time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="avg_t_mustrma">Avg time \(s\): ${jube_pat_fp}</pattern>
+      <pattern name="rate_mustrma">Rate \([^\s]*\): ${jube_pat_fp}</pattern>
+    </patternset>
+
+    <analyser name="analyse_prk">
+      <analyse step="run_prk">
+        <file use="prk_pattern_plain">out_plain</file>
+        <file use="prk_pattern_tsan">out_tsan</file>
+        <file use="prk_pattern_mustrma">out_mustrma</file>
+      </analyse>
+    </analyser>
+
+    <result tag="stencil">
+      <use>analyse_prk</use>
+      <table name="PRK Results Stencil" style="pretty">
+        <column title="tasks">tasks</column>
+        <column title="num_iters">num_iterations</column>
+        <column title="grid_size">grid_size</column>
+        <column title="avg_t_plain(s)">avg_t_plain</column>
+        <column title="avg_t_tsan(s)">avg_t_tsan</column>
+        <column title="avg_t_mustrma(s)">avg_t_mustrma</column>
+        <column title="rate_plain (MFlops/s)">rate_plain</column>
+        <column title="rate_tsan (MFlops/s)">rate_tsan</column>
+        <column title="rate_mustrma (MFlops/s)">rate_mustrma</column>
+      </table>
+    </result>
+
+    <result tag="transpose">
+      <use>analyse_prk</use>
+      <table name="PRK Transpose Results" style="pretty">
+        <column title="tasks">tasks</column>
+        <column title="num_iters">num_iterations</column>
+        <column title="matrix_order">matrix_order</column>
+        <column title="avg_t_plain(s)">avg_t_plain</column>
+        <column title="avg_t_tsan(s)">avg_t_tsan</column>
+        <column title="avg_t_mustrma(s)">avg_t_mustrma</column>
+        <column title="rate_plain (MB/s)">rate_plain</column>
+        <column title="rate_tsan (MB/s)">rate_tsan</column>
+        <column title="rate_mustrma (MB/s)">rate_mustrma</column>
+      </table>
+    </result>
+
+  </benchmark>
+</jube>

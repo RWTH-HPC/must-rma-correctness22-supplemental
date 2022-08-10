@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_DatatypeChecks" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="DatatypeChecks">
+            <registered-name>DatatypeChecks</registered-name>
+            <module-name>libdatatypeChecks</module-name>
+            <header-name>I_DatatypeChecks.h</header-name>
+            <interface-type>I_DatatypeChecks</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Base">ParallelIdAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Base">CreateMessage</analysis-depend>
+                <analysis-depend group="MUST_Base">ArgumentAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Resource">DatatypeTrack</analysis-depend>
+            </dependencies>
+            <analysis-function name="errorIfNotKnown">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="errorIfNull">
+                <analysis-argument order="0" type="uint64_t" name="pId" >
+                </analysis-argument>
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="errorIfNotCommited">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" >
+                </analysis-argument>
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="warningIfCommited">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="warningIfNotPropperlyAligned">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="errorIfNotValidForCommunication">
+                <analysis-argument order="0" type="uint64_t" name="pId" >
+                </analysis-argument>
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="errorIfArrayNotValidForCommunication">
+                <analysis-argument order="0" type="uint64_t" name="pId" >
+                </analysis-argument>
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@*" name="datatypes" />
+                <analysis-argument order="4" type="int" name="count" />
+            </analysis-function>
+            <analysis-function name="errorIfNotValidForCreate">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" >
+                </analysis-argument>
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+            <analysis-function name="errorIfArrayNotValidForCreate">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" >
+                </analysis-argument>
+                <analysis-argument order="2" type="int" name="aId" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@*" name="datatypes" />
+                <analysis-argument order="4" type="int" name="count" />
+            </analysis-function>
+            <analysis-function name="errorIfNotValidForCommit">
+                <analysis-argument order="0" type="uint64_t" name="pId" >
+                </analysis-argument>
+                <analysis-argument order="1" type="uint64_t" name="lId" >
+                </analysis-argument>
+                <analysis-argument order="2" type="int" name="aId" >
+                </analysis-argument>
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+            </analysis-function>
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Part of the MUST Project, under BSD-3-Clause License
+# See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+# SPDX-License-Identifier: BSD-3-Clause
+
+
+for i in $(ipcs -m | grep ${USER} | grep -v '0x00000000' | awk '{print $1}')
+do 
+	ipcrm -M $i 
+done
+
+for i in $(ipcs -q | grep ${USER} | awk '{print $1}')
+do 
+	ipcrm -Q $i 
+done

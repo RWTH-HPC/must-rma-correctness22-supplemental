@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_CompletionCondition" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="CompletionCondition">
+            <registered-name>CompletionCondition</registered-name>
+            <module-name>libcompletionCondition</module-name>
+            <header-name>I_CompletionCondition.h</header-name>
+            <interface-type>I_CompletionCondition</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Resource">RequestTrack</analysis-depend>
+            </dependencies>
+            <analysis-function name="waitAny">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@*" name="requests" />
+                <analysis-argument order="3" type="int" name="count" />
+            </analysis-function>
+            <analysis-function name="waitSome">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@*" name="requests" />
+                <analysis-argument order="3" type="int" name="count" />
+            </analysis-function>
+            <analysis-function name="waitAll">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@*" name="requests" />
+                <analysis-argument order="3" type="int" name="count" />
+            </analysis-function>
+        <analysis-function name="wait">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@" name="request" />
+            </analysis-function></analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

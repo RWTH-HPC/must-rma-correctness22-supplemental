@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_MpiTypeChecks" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="MpiTypeArt">
+            <registered-name>MpiTypeArt</registered-name>
+            <module-name>libmpiTypeArt</module-name>
+            <header-name>I_MpiTypeArt.h</header-name>
+            <interface-type>I_MpiTypeArt</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Base">ParallelIdAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Base">LocationAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Base">CreateMessage</analysis-depend>
+                <analysis-depend group="MUST_Base">ArgumentAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Resource">DatatypeTrack</analysis-depend>
+            </dependencies>
+            <analysis-function name="checkSendOrRecv">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@AINT_TYPE@" name="buffer" />
+                <analysis-argument order="3" type="@DATATYPE_F_TYPE@" name="datatype" />
+                <analysis-argument order="4" type="int" name="count" />
+            </analysis-function>
+            <analysis-function name="checkSendOrRecvCounts">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@AINT_TYPE@" name="buffer" />
+                <analysis-argument order="3" type="int*" name="displs" />
+                <analysis-argument order="4" type="int*" name="counts" />
+                <analysis-argument order="5" type="@DATATYPE_F_TYPE@" name="datatype" />
+                <analysis-argument order="6" type="int" name="commsize" />
+            </analysis-function>
+            <analysis-function name="checkSendOrRecvTypes">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@AINT_TYPE@" name="buffer" />
+                <analysis-argument order="3" type="int*" name="displs" />
+                <analysis-argument order="4" type="int*" name="counts" />
+                <analysis-argument order="5" type="@DATATYPE_F_TYPE@*" name="datatypes" />
+                <analysis-argument order="6" type="int" name="commsize" />
+            </analysis-function>
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

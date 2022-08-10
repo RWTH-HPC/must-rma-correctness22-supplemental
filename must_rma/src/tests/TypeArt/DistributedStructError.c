@@ -1,0 +1,50 @@
+/*
+ * Part of the MUST Project, under BSD-3-Clause License
+ * See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+// RUN: export TYPEART_TYPE_FILE=%must-bin-dir/%basename_t-o.yaml
+// RUN: %typeart-mpicc %s -o %must-bin-dir/%basename_t.exe
+
+// RUN: %must-run %mpiexec-numproc-flag 2 --must:typeart \
+// RUN: %must-bin-dir/%basename_t.exe 2>&1 \
+// RUN: | %filecheck %s
+
+// REQUIRES: typeart
+
+#include <mpi.h>
+#include <stddef.h>
+
+typedef struct {
+  float imag;
+  float real;
+} complex;
+
+void g_complexsum(complex* cpt) {
+  int counts[2]         = {1, 1};
+  MPI_Aint offsets[2]   = {offsetof(complex, imag), offsetof(complex, real)};
+  MPI_Datatype types[2] = {MPI_FLOAT, MPI_DOUBLE};
+
+  MPI_Datatype datatype;
+  MPI_Type_create_struct(2, counts, offsets, types, &datatype);
+  MPI_Type_set_name(datatype, "struct_test_type");
+  MPI_Type_commit(&datatype);
+
+  // CHECK: Buffer too small: Transfer of type [1x"MUST_type_struct"] with byte count of 12 longer than buffer argument of type [1x"struct.complex"] with byte count of 8. Dependent error: Incompatible buffer element of type 5 (float) of struct struct.complex - expected MPI_DOUBLE instead
+  MPI_Bcast(&cpt->imag, 1, datatype, 0, MPI_COMM_WORLD);
+
+  MPI_Type_free(&datatype);
+}
+
+int main(int argc, char** argv) {
+  MPI_Init(&argc, &argv);
+  int rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+  complex c={1.0, 2.0};  // This allocation becomes an int64 with a bit-mask store at -Ox
+  g_complexsum(&c);
+
+  MPI_Finalize();
+  return 0;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_TSan_Annotations" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="TSan">
+            <registered-name>TSan</registered-name>
+            <module-name>libtSan</module-name>
+            <header-name>I_TSan.h</header-name>
+            <interface-type>I_TSan</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Base">CreateMessage</analysis-depend>
+                <analysis-depend group="MUST_Base">LocationAnalysis</analysis-depend>
+            </dependencies>
+            <analysis-function name="dummy" needs-channel-id="yes">
+            </analysis-function>
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

@@ -1,0 +1,4 @@
+# comments
+
+messageType: MUST_ERROR_MESSAGE_LOST:fun:main
+

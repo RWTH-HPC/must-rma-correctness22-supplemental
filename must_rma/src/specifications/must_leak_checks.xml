@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_LeakChecks" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="LeakChecks">
+            <registered-name>LeakChecks</registered-name>
+            <module-name>libleakChecks</module-name>
+            <header-name>I_LeakChecks.h</header-name>
+            <interface-type>I_LeakChecks</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="MUST_Base">ParallelIdAnalysis</analysis-depend>
+                <analysis-depend group="MUST_Base">CreateMessage</analysis-depend>
+                <analysis-depend group="MUST_Resource">CommTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">DatatypeTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">ErrTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">GroupTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">KeyvalTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">OpTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">RequestTrack</analysis-depend>
+            </dependencies>
+            <analysis-function name="finalizeNotify" needs-channel-id="yes">
+            </analysis-function>
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

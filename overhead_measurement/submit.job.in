@@ -1,0 +1,46 @@
+#!/bin/bash -x
+#SBATCH --job-name=#BENCHNAME#
+#SBATCH --nodes=#NODES#
+#SBATCH --time=#TIME_LIMIT#
+#SBATCH --output=#STDOUTLOGFILE#
+#SBATCH --error=#STDERRLOGFILE#
+#SBATCH --partition=#QUEUE#
+#ACCOUNT_CONFIG#
+#ADDITIONAL_JOB_CONFIG#
+#SBATCH --overcommit
+
+#ENV#
+
+#PREPROCESS#
+
+JUBE_ERR_CODE=$?
+if [ $JUBE_ERR_CODE -ne 0 ]; then
+    #FLAG_ERROR#
+    exit $JUBE_ERR_CODE
+fi
+
+export I_MPI_PIN=on
+export I_MPI_JOB_RESPECT_PROCESS_PLACEMENT=off
+export I_MPI_PERHOST=#TASKSPERNODE#
+export I_MPI_PIN_DOMAIN=2,compact
+export I_MPI_PIN_ORDER=spread
+
+#MEASUREMENT# #STARTER# #ARGS_STARTER# #EXECUTABLE#.plain #ARGS_EXECUTABLE# > out_plain
+#MEASUREMENT# #STARTER# #ARGS_STARTER# #EXECUTABLE#.tsan #ARGS_EXECUTABLE# > out_tsan
+#MUSTRUN# --must:layout $(pwd)/layout.xml --must:mpiexec mpiexec.hydra -- #EXECUTABLE#.tsan #ARGS_EXECUTABLE# > out_mustrma
+
+JUBE_ERR_CODE=$?
+if [ $JUBE_ERR_CODE -ne 0 ]; then
+    #FLAG_ERROR#
+    exit $JUBE_ERR_CODE
+fi
+
+#POSTPROCESS#
+
+JUBE_ERR_CODE=$?
+if [ $JUBE_ERR_CODE -ne 0 ]; then
+    #FLAG_ERROR#
+    exit $JUBE_ERR_CODE
+fi
+
+#FLAG#

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jube>
+    <parameterset name="imb_compiler_pset_default">
+      <parameter name="instrumenter"></parameter>
+      <parameter name="MPICH_CC" export="true">${c_compiler}</parameter>
+      <parameter name="MPICH_CXX" export="true">${cxx_compiler}</parameter>
+      <parameter name="MPICC" export="true">mpigcc</parameter>
+      <parameter name="MPICXX" export="true">mpigxx</parameter>
+    </parameterset>
+
+  <parameterset name="imb_compiler_pset" init_with="compiler.xml:imb_compiler_pset_default">
+      <parameter name="CC" export="true">clang</parameter>
+      <parameter name="CXX" export="true">clang++</parameter>
+      <parameter name="c_compiler">clang</parameter>
+      <parameter name="cxx_compiler">clang++</parameter>
+      <parameter name="CFLAGS" export="true">-g -O3</parameter>
+      <parameter name="compiler_module">clang/12</parameter>
+    </parameterset>
+</jube>

@@ -1,0 +1,69 @@
+#! /bin/bash
+
+# This file is part of GTI (Generic Tool Infrastructure)
+#
+# Copyright (C)
+#   2008-2019 ZIH, Technische Universitaet Dresden, Federal Republic of Germany
+#   2008-2019 Lawrence Livermore National Laboratories, United States of America
+#   2013-2019 RWTH Aachen University, Federal Republic of Germany
+#
+# See the LICENSE file in the package base directory for details
+
+#Set up P^nMPI module file
+echo -e "module libcProtMpiSplitComm\n" \
+	    "argument num_sets 3\n" \
+		"argument size_0 1\n" \
+	    "argument stack_0 level_0\n" \
+        "argument place_0 mpi_place\n" \
+	    "argument size_1 4\n" \
+	    "argument stack_1 level_1\n" \
+        "argument place_1 mpi_place\n" \
+	    "argument size_2 2\n" \
+	    "argument stack_2 level_2\n" \
+        "argument place_2 mpi_place\n" \
+	    "\n"\
+	    "stack level_0\n" \
+	    "\n"\
+	    "stack level_1\n" \
+		"module libtest_cstrat_b\n"\
+		"argument moduleName test_cstrat_b\n"\
+        "argument numInstances 1\n"\
+        "argument instance0 instance0\n"\
+        "argument instance0Data otf_proc_id=100\n"\
+        "argument instance0SubMods CStratSimpleUp:instance0\n"\
+        "module libcStratSimpleUp\n"\
+        "argument moduleName CStratSimpleUp\n"\
+        "argument numInstances 1\n"\
+        "argument instance0 instance0\n"\
+        "argument instance0SubMods CProtMpiSplited:instance0\n"\
+        "module libcProtMpiSplited\n"\
+        "argument moduleName CProtMpiSplited\n"\
+        "argument numInstances 2\n"\
+        "argument instance0 instance0\n"\
+        "argument instance0Data comm_id=2,side=b,tier_size=4,gti_layer_has_intra_comm=0,gti_level_0_mpi=1,gti_own_level=0\n"\
+        "argument instance1 instance1\n"\
+        "argument instance1Data comm_id=1,side=t,tier_size=2,gti_layer_has_intra_comm=0,gti_level_0_mpi=1,gti_level_1_mpi=1,gti_own_level=1\n"\
+        "\n"\
+	    "stack level_2\n" \
+		"module libtest_cstrat_t\n" \
+		"argument moduleName test_cstrat_t\n"\
+        "argument numInstances 1\n"\
+        "argument instance0 instance0\n"\
+        "argument instance0Data otf_proc_id=200\n"\
+        "argument instance0SubMods CStratSimpleDown:instance0\n"\
+        "module libcStratSimpleDown\n" \
+        "argument moduleName CStratSimpleDown\n"\
+        "argument numInstances 1\n"\
+        "argument instance0 instance0\n"\
+        "argument instance0SubMods CProtMpiSplited:instance1\n"\
+        "module libcProtMpiSplited\n"\
+  > ${PROJECT_BINARY_DIR}/bin/test-comm-mpi-split-pnmpi.conf
+    
+${MPIEXEC_EXECUTABLE} \
+    ${MPIEXEC_NUMPROC_FLAG}  7 \
+    env MALLOC_CHECK_=2 \
+	    PNMPI_LIB_PATH=${CMAKE_INSTALL_PREFIX}/modules \
+	    LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/modules:${CMAKE_INSTALL_PREFIX}/lib:${PnMPI_LIBRARY_DIR}:$LD_LIBRARY_PATH \
+	    DYLD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/modules:${CMAKE_INSTALL_PREFIX}/lib:${PnMPI_LIBRARY_DIR}:$DYLD_LIBRARY_PATH \
+	    PNMPI_CONF=${PROJECT_BINARY_DIR}/bin/test-comm-mpi-split-pnmpi.conf \
+    ${PROJECT_BINARY_DIR}/bin/hello_pnmpi

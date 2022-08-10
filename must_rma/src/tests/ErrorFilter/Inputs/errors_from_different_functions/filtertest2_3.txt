@@ -1,0 +1,4 @@
+# comments
+
+messageType: MUST_ERROR_TYPEMATCH_MISMATCH:fun:test2
+messageType: MUST_ERROR_TYPEMATCH_MISMATCH:fun:test1

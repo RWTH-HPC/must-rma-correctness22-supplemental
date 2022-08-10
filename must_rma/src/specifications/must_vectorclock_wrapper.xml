@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Part of the MUST Project, under BSD-3-Clause License
+ See https://hpc.rwth-aachen.de/must/LICENSE for license information.
+  SPDX-License-Identifier: BSD-3-Clause
+-->
+
+<!DOCTYPE analysis-specification PUBLIC "must_base" "@MUST_SPECIFICATION_DTD_PATH@/analysis-specification.dtd">
+<analysis-specification group-name="MUST_VectorClock" include-path="" path-to-libs="@CMAKE_INSTALL_PREFIX@/modules">
+    <analyses>
+        <analysis name="VectorClockWrapper">
+            <registered-name>VectorClockWrapper</registered-name>
+            <module-name>libvectorClockWrapper</module-name>
+            <header-name>I_VectorClockWrapper.h</header-name>
+            <interface-type>I_VectorClockWrapper</interface-type>
+            <is-global>0</is-global>
+            <is-process-global>0</is-process-global>
+            <dependencies>
+                <analysis-depend group="GTI_IMPLICIT">VectorClock</analysis-depend>
+                <analysis-depend group="MUST_Resource">CommTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">GroupTrack</analysis-depend>
+                <analysis-depend group="MUST_Resource">WinTrack</analysis-depend>
+                <analysis-depend group="MUST_Base">ParallelIdAnalysis</analysis-depend>
+            </dependencies>
+            <analysis-function name="init"></analysis-function>
+            <analysis-function name="tick"></analysis-function>
+            <analysis-function name="signal">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="isSync" />
+                <analysis-argument order="2" type="int" name="appRank" />
+                <analysis-argument order="3" type="int" name="tag" />
+                <analysis-argument order="4" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+            <analysis-function name="wait">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="appRank" />
+                <analysis-argument order="2" type="int" name="tag" />
+                <analysis-argument order="3" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+            <analysis-function name="waitForResponse">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="appRank" />
+                <analysis-argument order="2" type="int" name="tag" />
+                <analysis-argument order="3" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+            <analysis-function name="allToOne">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="2" type="int" name="root" />
+            </analysis-function>
+            <analysis-function name="oneToAll">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="2" type="int" name="root" />
+            </analysis-function>
+            <analysis-function name="allToAll">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+            <analysis-function name="bufferWait">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@" name="request" />
+            </analysis-function>
+            <analysis-function name="bufferA2aClock">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="2" type="@REQUEST_F_TYPE@" name="request" />
+            </analysis-function>
+            <analysis-function name="bufferA2oClock">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="root" />
+                <analysis-argument order="2" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="3" type="@REQUEST_F_TYPE@" name="request" />
+            </analysis-function>
+            <analysis-function name="bufferO2aClock">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="root" />
+                <analysis-argument order="2" type="@COMM_F_TYPE@" name="comm" />
+                <analysis-argument order="3" type="@REQUEST_F_TYPE@" name="request" />
+            </analysis-function>
+            <analysis-function name="handleRequest">
+                <analysis-argument order="0" type="@REQUEST_F_TYPE@" name="request" />
+                <analysis-argument order="1" type="int" name="source" />
+                <analysis-argument order="2" type="int" name="tag" />
+            </analysis-function>
+            <analysis-function name="handleRequestArray">
+                <analysis-argument order="0" type="@REQUEST_F_TYPE@*" name="requests" />
+                <analysis-argument order="1" type="int*" name="sources" />
+                <analysis-argument order="2" type="int*" name="tags" />
+                <analysis-argument order="3" type="size_t" name="count" />
+            </analysis-function>
+            <analysis-function name="handleAnyRequest">
+                <analysis-argument order="0" type="@REQUEST_F_TYPE@*" name="requests" />
+                <analysis-argument order="1" type="int" name="index" />
+                <analysis-argument order="2" type="int" name="tag" />
+                <analysis-argument order="3" type="size_t" name="count" />
+            </analysis-function>
+            <analysis-function name="winAllToAll">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@WIN_F_TYPE@" name="winHandle" />
+            </analysis-function>
+            <analysis-function name="winStart">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@GROUP_F_TYPE@" name="groupHandle" />
+                <analysis-argument order="3" type="@WIN_F_TYPE@" name="winHandle" />
+            </analysis-function>
+            <analysis-function name="winComplete">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@WIN_F_TYPE@" name="winHandle" />
+            </analysis-function>
+            <analysis-function name="winPost">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@GROUP_F_TYPE@" name="groupHandle" />
+                <analysis-argument order="3" type="@WIN_F_TYPE@" name="winHandle" />
+            </analysis-function>
+            <analysis-function name="winWait">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="uint64_t" name="lId" />
+                <analysis-argument order="2" type="@WIN_F_TYPE@" name="winHandle" />
+            </analysis-function>
+            <analysis-function name="lock">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@WIN_F_TYPE@" name="winHandle" />
+                <analysis-argument order="2" type="int" name="appRank" />
+                <analysis-argument order="3" type="int" name="lock_type" />
+            </analysis-function>
+            <analysis-function name="unlock">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@WIN_F_TYPE@" name="winHandle" />
+                <analysis-argument order="2" type="int" name="appRank" />
+            </analysis-function>
+            <analysis-function name="addPersistentSendInfo">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="int" name="appRank" />
+                <analysis-argument order="2" type="int" name="tag" />
+                <analysis-argument order="3" type="@REQUEST_F_TYPE@" name="request" />
+                <analysis-argument order="4" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+            <analysis-function name="addPersistentRecvInfo">
+                <analysis-argument order="0" type="uint64_t" name="pId" />
+                <analysis-argument order="1" type="@REQUEST_F_TYPE@" name="request" />
+                <analysis-argument order="2" type="@COMM_F_TYPE@" name="comm" />
+            </analysis-function>
+        </analysis>
+    </analyses>
+    <operations>
+    </operations>
+</analysis-specification>

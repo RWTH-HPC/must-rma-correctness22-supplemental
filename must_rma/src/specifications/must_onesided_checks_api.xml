@@ -1,0 +1,1408 @@
+<!DOCTYPE api-specification SYSTEM "@MUST_SPECIFICATION_DTD_PATH@/api-specification.dtd">
+<api-specification unique-name="MUST_OneSidedChecks_API">
+    <api-headers>
+            <header>OneSidedChecksApi.h</header>
+    </api-headers>
+    <functions>
+        <function return-type="void" name="happensBeforeSync" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:happensBeforeSync" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="happensAfterSync" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:happensAfterSync" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateSend" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="dest" intent="in" />
+                <function-argument order="3" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:send" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>dest</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateRecv" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="source" intent="in" />
+                <function-argument order="3" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:recv" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>source</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateSendRecv" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="dest" intent="in" />
+                <function-argument order="3" type="int" name="source" intent="in" />
+                <function-argument order="4" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="5" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:sendRecv" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>dest</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>source</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateIsend" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="dest" intent="in" />
+                <function-argument order="3" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="4" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+                <function-argument order="5" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:isend" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>dest</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateIrecv" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="source" intent="in" />
+                <function-argument order="3" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="4" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:irecv" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>source</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateCompletedIsend" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:completedIsend" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateCompletedIrecv" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="source" intent="in" />
+                <function-argument order="3" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:completedIrecv" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>source</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateCompletedIcoll" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:completedIcoll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateColl" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@COMM_F_TYPE@" name="comm" intent="in" />
+                <function-argument order="3" type="int" name="hasRequest" intent="in" />
+                <function-argument order="4" type="@REQUEST_F_TYPE@" name="request" intent="in" />
+                <function-argument order="5" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:coll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>comm</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>hasRequest</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>request</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateGetCall" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@AINT_TYPE@" name="originaddr" intent="in" />
+                <function-argument order="3" type="int" name="origincount" intent="in" />
+                <function-argument order="4" type="@DATATYPE_F_TYPE@" name="origintype" intent="in" />
+                <function-argument order="5" type="int" name="target" intent="in" />
+                <function-argument order="6" type="int" name="targetdisp" intent="in" />
+                <function-argument order="7" type="int" name="targetcount" intent="in" />
+                <function-argument order="8" type="@DATATYPE_F_TYPE@" name="targettype" intent="in" />
+                <function-argument order="9" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="10" type="@REQUEST_F_TYPE@" name="requesttype" intent="in" />
+                <function-argument order="11" type="void*" name="ann" intent="in" />
+                <function-argument order="12" type="void*" name="functionaddr" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:addGetOperation" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>originaddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>origincount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>origintype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>targetdisp</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>targetcount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>targettype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="9">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="10">
+                            <call-arg-name>requesttype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="11">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="12">
+                            <call-arg-name>functionaddr</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagatePutCall" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@AINT_TYPE@" name="originaddr" intent="in" />
+                <function-argument order="3" type="int" name="origincount" intent="in" />
+                <function-argument order="4" type="@DATATYPE_F_TYPE@" name="origintype" intent="in" />
+                <function-argument order="5" type="int" name="target" intent="in" />
+                <function-argument order="6" type="int" name="targetdisp" intent="in" />
+                <function-argument order="7" type="int" name="targetcount" intent="in" />
+                <function-argument order="8" type="@DATATYPE_F_TYPE@" name="targettype" intent="in" />
+                <function-argument order="9" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="10" type="@REQUEST_F_TYPE@" name="requesttype" intent="in" />
+                <function-argument order="11" type="void*" name="ann" intent="in" />
+                <function-argument order="12" type="void*" name="functionaddr" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:addPutOperation" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>originaddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>origincount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>origintype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>targetdisp</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>targetcount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>targettype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="9">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="10">
+                            <call-arg-name>requesttype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="11">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="12">
+                            <call-arg-name>functionaddr</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateAccumulateCall" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@AINT_TYPE@" name="originaddr" intent="in" />
+                <function-argument order="3" type="int" name="origincount" intent="in" />
+                <function-argument order="4" type="@DATATYPE_F_TYPE@" name="origintype" intent="in" />
+                <function-argument order="5" type="int" name="target" intent="in" />
+                <function-argument order="6" type="int" name="targetdisp" intent="in" />
+                <function-argument order="7" type="int" name="targetcount" intent="in" />
+                <function-argument order="8" type="@DATATYPE_F_TYPE@" name="targettype" intent="in" />
+                <function-argument order="9" type="@OP_F_TYPE@" name="op" intent="in" />
+                <function-argument order="10" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="11" type="@REQUEST_F_TYPE@" name="requesttype" intent="in" />
+                <function-argument order="12" type="void*" name="ann" intent="in" />
+                <function-argument order="13" type="void*" name="functionaddr" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:addAccumulateOperation" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>originaddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>origincount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>origintype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>targetdisp</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>targetcount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>targettype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="9">
+                            <call-arg-name>op</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="10">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="11">
+                            <call-arg-name>requesttype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="12">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="13">
+                            <call-arg-name>functionaddr</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateGetAccumulateCall" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@AINT_TYPE@" name="originaddr" intent="in" />
+                <function-argument order="3" type="int" name="origincount" intent="in" />
+                <function-argument order="4" type="@DATATYPE_F_TYPE@" name="origintype" intent="in" />
+                <function-argument order="5" type="@AINT_TYPE@" name="resultaddr" intent="in" />
+                <function-argument order="6" type="int" name="resultcount" intent="in" />
+                <function-argument order="7" type="@DATATYPE_F_TYPE@" name="resulttype" intent="in" />
+                <function-argument order="8" type="int" name="target" intent="in" />
+                <function-argument order="9" type="int" name="targetdisp" intent="in" />
+                <function-argument order="10" type="int" name="targetcount" intent="in" />
+                <function-argument order="11" type="@DATATYPE_F_TYPE@" name="targettype" intent="in" />
+                <function-argument order="12" type="@OP_F_TYPE@" name="op" intent="in" />
+                <function-argument order="13" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="14" type="@REQUEST_F_TYPE@" name="requesttype" intent="in" />
+                <function-argument order="15" type="void*" name="ann" intent="in" />
+                <function-argument order="16" type="void*" name="functionaddr" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:addGetAccumulateOperation" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>originaddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>origincount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>origintype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>resultaddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>resultcount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>resulttype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="9">
+                            <call-arg-name>targetdisp</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="10">
+                            <call-arg-name>targetcount</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="11">
+                            <call-arg-name>targettype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="12">
+                            <call-arg-name>op</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="13">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="14">
+                            <call-arg-name>requesttype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="15">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="16">
+                            <call-arg-name>functionaddr</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinCreate" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winCreate" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinLock" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="lock_type" intent="in" />
+                <function-argument order="3" type="int" name="rank" intent="in" />
+                <function-argument order="4" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="5" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winLock" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>lock_type</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:privateWindowUpdate" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinSync" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:privateWindowUpdate" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinUnlock" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="rank" intent="in" />
+                <function-argument order="3" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionRank" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:passiveTargetCompletionRank" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinUnlockAll" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:passiveTargetCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinFence" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:activeTargetCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:originCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:privateWindowUpdate" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinStart" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@GROUP_F_TYPE@" name="group" intent="in" />
+                <function-argument order="3" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winStart" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>group</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinComplete" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winComplete" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinPost" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@GROUP_F_TYPE@" name="group" intent="in" />
+                <function-argument order="3" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winPost" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>group</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinWait" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:winWait" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinFlush" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="rank" intent="in" />
+                <function-argument order="3" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionRank" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:passiveTargetCompletionRank" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinFlushLocal" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="int" name="rank" intent="in" />
+                <function-argument order="3" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="4" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionRank" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinFlushAll" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:passiveTargetCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateWinFlushLocalAll" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" type="uint64_t" name="pId" intent="in" />
+                <function-argument order="1" type="uint64_t" name="lId" intent="in" />
+                <function-argument order="2" type="@WIN_F_TYPE@" name="win" intent="in" />
+                <function-argument order="3" type="void*" name="ann" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:originCompletionAll" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="propagateSignal" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="ann" type="void*" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="TSanSyncClockRecorder:storeSyncClock" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>ann</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="notifySync" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="remoteRank" type="int" intent="in" />
+                <function-argument order="1" name="ownRank" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="RMATrack:receiveSync" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>remoteRank</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>ownRank</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="notifyOriginOpStart" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="rmaId" type="uint64_t" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="OriginChecks:originOpStart" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>rmaId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="notifyOriginOpComplete" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="pId" type="uint64_t" intent="in" />
+                <function-argument order="1" name="lId" type="uint64_t" intent="in" />
+                <function-array-argument order="2" name="rmaId" type="uint64_t*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>rmaIdLen</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="rmaIdLen" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="OriginChecks:originOpComplete" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rmaId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>rmaIdLen</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="notifyTargetOpStart" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="rmaId" type="uint64_t" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="TargetChecks:targetOpStart" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>rmaId</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="void" name="notifyTargetOpComplete" wrapp-everywhere="yes">
+            <function-arguments>
+                <function-argument order="0" name="pId" type="uint64_t" intent="in" />
+                <function-argument order="1" name="lId" type="uint64_t" intent="in" />
+                <function-array-argument order="2" name="rmaId" type="uint64_t*" intent="in">
+                    <length-argument type="argument">
+                        <call-arg-name>rmaIdLen</call-arg-name>
+                    </length-argument>
+                </function-array-argument>
+                <function-argument order="3" name="rmaIdLen" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="TargetChecks:targetOpComplete" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>rmaId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>rmaIdLen</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+        </function>
+        <function return-type="int" name="passTargetRMAOpAcross" wrapp-across="yes">
+            <function-arguments>
+                <function-argument order="0" name="origin" type="int" intent="in" />
+                <function-argument order="1" name="rmaId" type="uint64_t" intent="in" />
+                <function-argument order="2" name="pId" type="uint64_t" intent="in" />
+                <function-argument order="3" name="lId" type="uint64_t" intent="in" />
+                <function-argument order="4" name="isStore" type="int" intent="in" />
+                <function-argument order="5" name="isAtomic" type="int" intent="in" />
+                <function-argument order="6" name="isLocked" type="int" intent="in" />
+                <function-argument order="7" name="target" type="int" intent="in" />
+                <function-argument order="8" name="disp" type="int" intent="in" />
+                <function-argument order="9" name="count" type="int" intent="in" />
+                <function-argument order="10" name="originDatatype" type="uint64_t" intent="in" />
+                <function-argument order="11" name="targetDatatype" type="uint64_t" intent="in" />
+                <function-argument order="12" name="win" type="uint64_t" intent="in" />
+                <function-argument order="13" name="epoch" type="int" intent="in" />
+                <function-argument order="14" name="accessMode" type="int" intent="in" />
+                <function-argument order="15" name="originClock" type="unsigned long long" intent="in" />
+                <function-argument order="16" name="returnAddr" type="void*" intent="in" />
+                <function-argument order="17" name="functionAddr" type="void*" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:receiveRMACall" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:addRemoteRMA" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>origin</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>rmaId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>isStore</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>isAtomic</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="6">
+                            <call-arg-name>isLocked</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="7">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="8">
+                            <call-arg-name>disp</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="9">
+                            <call-arg-name>count</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="10">
+                            <call-arg-name>originDatatype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="11">
+                            <call-arg-name>targetDatatype</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="12">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="13">
+                            <call-arg-name>epoch</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="14">
+                            <call-arg-name>accessMode</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="15">
+                            <call-arg-name>originClock</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="16">
+                            <call-arg-name>returnAddr</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="17">
+                            <call-arg-name>functionAddr</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+            <created-by>
+                <by name="RMATrack" group="MUST_OneSidedChecks" />
+            </created-by>
+        </function>
+        <function return-type="int" name="passTargetCompletionAcross" wrapp-across="yes">
+            <function-arguments>
+                <function-argument order="0" name="pId" type="uint64_t" intent="in" />
+                <function-argument order="1" name="lId" type="uint64_t" intent="in" />
+                <function-argument order="2" name="origin" type="int" intent="in" />
+                <function-argument order="3" name="target" type="int" intent="in" />
+                <function-argument order="4" name="win" type="uint64_t" intent="in" />
+                <function-argument order="5" name="epoch" type="int" intent="in" />
+            </function-arguments>
+            <analyses>
+                <analysis order="pre" name="MPIVectorClock:receiveRMACall" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                    </analysis-arguments>
+                </analysis>
+                <analysis order="pre" name="RMATrack:addRemoteTargetCompletion" group="MUST_OneSidedChecks">
+                    <analysis-arguments>
+                        <analysis-argument type="mapped" analysis-arg-order="0">
+                            <call-arg-name>pId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="1">
+                            <call-arg-name>lId</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="2">
+                            <call-arg-name>origin</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="3">
+                            <call-arg-name>target</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="4">
+                            <call-arg-name>win</call-arg-name>
+                        </analysis-argument>
+                        <analysis-argument type="mapped" analysis-arg-order="5">
+                            <call-arg-name>epoch</call-arg-name>
+                        </analysis-argument>
+                    </analysis-arguments>
+                </analysis>
+            </analyses>
+            <operations>
+            </operations>
+            <created-by>
+                <by name="RMATrack" group="MUST_OneSidedChecks" />
+            </created-by>
+        </function>
+    </functions>
+</api-specification>

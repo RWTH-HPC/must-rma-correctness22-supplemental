@@ -1,0 +1,28 @@
+# Assume that the MUST runtime itself is race free.
+#called_from_lib:libcProtSharedMemory.so
+#mutex:libcProtSharedMemory.so
+# Assume that the MPI runtime itself is race free.
+called_from_lib:libopen-pal.so.13
+called_from_lib:mca_shmem_mmap.so
+called_from_lib:mca_shmem_posix.so
+called_from_lib:mca_grpcomm_bad.so
+called_from_lib:mca_routed_binomial.so
+called_from_lib:libopen-rte.so.12
+called_from_lib:mca_db_hash.so
+called_from_lib:mca_rml_oob.so
+called_from_lib:mca_oob_tcp.so
+called_from_lib:mca_btl_openib.so
+called_from_lib:mca_pml_bfo.so
+called_from_lib:mca_btl_vader.so
+mutex:libmpi.so.12
+mutex:mca_pml_ob1.so
+
+race:libopen-pal.so.20
+race:mca_pmix_pmix112.so
+deadlock:mca_btl_openib.so
+mutex:mca_btl_openib.so
+deadlock:sync_wait_mt
+
+# Assume that the OpenMP runtime itself is race free.
+race:__kmp_resume_template
+race:__kmp_suspend_initialize_thread
